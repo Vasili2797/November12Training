@@ -11,6 +11,7 @@ public class SanityTests {
 	  var myVarString="myVarTest";
 	  String developBranch="changesInThisBranch";
 	  String newBranch="Hello Everyone";
+	  String mainBranch="changeInmainBranch Hello";
   }
 }
 	
