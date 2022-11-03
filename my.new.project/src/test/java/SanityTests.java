@@ -10,7 +10,7 @@ public class SanityTests {
 	  String myString="NewString";
 	  var myVarString="myVarTest";
 	  String developBranch="changesInThisBranch";
-	  String mainBranch="changeInmainBranch";
+	  String newBranch="Hello Everyone";
   }
 }
 	
