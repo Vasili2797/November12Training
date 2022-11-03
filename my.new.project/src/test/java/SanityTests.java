@@ -12,6 +12,7 @@ public class SanityTests {
 	  String developBranch="changesInThisBranch";
 	  String newBranch="Hello Everyone";
 	  String mainBranch="changeInmainBranch Hello";
+	  
   }
 }
 	
