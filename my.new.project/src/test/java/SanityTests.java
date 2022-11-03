@@ -9,5 +9,6 @@ public class SanityTests {
   public void canUseVar() {
 	  String myString="myStringIsThis";
 	  var myVarString="myVarTest";
+	  String developBranch="changesInThisBranch";
   }
 }
