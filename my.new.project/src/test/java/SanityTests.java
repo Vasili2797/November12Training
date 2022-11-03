@@ -7,7 +7,7 @@ public class SanityTests {
   
   @Test
   public void canUseVar() {
-	  String myString="myStringIsThis";
+	  String myString="NewString";
 	  var myVarString="myVarTest";
 	  String developBranch="changesInThisBranch";
 	  String mainBranch="changeInmainBranch";
