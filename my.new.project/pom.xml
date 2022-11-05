@@ -3,7 +3,6 @@
   <groupId>quintrix.com</groupId>
   <artifactId>my.new.project</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  
       <build>
         <plugins>
             <plugin>
