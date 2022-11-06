@@ -5,5 +5,4 @@ public class City {
 	public City(String name) {
 		
 	}
-
 }

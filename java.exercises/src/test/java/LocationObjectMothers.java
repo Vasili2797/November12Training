@@ -16,7 +16,6 @@ public class LocationObjectMothers {
 				.build();
 	}
 	
-	//Started new
 	public static LocationObjectMother Charlotte() {
 		return new LocationBuilder()
 				.withState(States.northCarolina)
@@ -37,5 +36,4 @@ public class LocationObjectMothers {
 				.withCity(Cities.Seattle)
 				.build();
 	}
-	
 }
