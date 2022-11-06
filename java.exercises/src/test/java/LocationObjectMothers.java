@@ -1,4 +1,3 @@
-
 public class LocationObjectMothers {
 
 	public static LocationObjectMother NewOrleans() {

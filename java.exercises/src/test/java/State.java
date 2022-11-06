@@ -1,4 +1,3 @@
-
 public class State {
 
 	public String Name;

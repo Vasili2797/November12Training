@@ -1,4 +1,3 @@
-
 public class City {
 	
 	public String Name;
