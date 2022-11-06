@@ -1,3 +1,4 @@
+
 public class LocationBuilder {
 
 	private LocationObjectMother mother;
@@ -20,5 +21,4 @@ public class LocationBuilder {
 		
 		return this.mother;
 	}
-
 }

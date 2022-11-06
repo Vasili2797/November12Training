@@ -10,7 +10,7 @@ public class DataProviderTests {
 
 		Assert.assertEquals(actualState, expectedState, "The state name should be returned.");
 	}
-
+	
 	@Test
 	public void canGetStateAbbreviation() {
 		var expectedAbbreviation="TX";
@@ -28,7 +28,7 @@ public class DataProviderTests {
 		
 		Assert.assertEquals(actualState, expectedState);
 	}
-
+	
 	private String getState(LocationObjectMother mother) {
 		
 		return mother.State.Name;
@@ -61,10 +61,3 @@ public class DataProviderTests {
 		Assert.assertEquals(actualState, expectedState);
 	}
 }
-
-
-
-
-
-
-
