@@ -1,10 +1,9 @@
-public class State {
+public class State  extends GeneralData{
 
-	public String Name;
 	public String Abbreviation;
 
-	public State(String string, String abbreviation) {
-		this.Name = string;
+	public State(String name, String abbreviation) {
+		super(name);
 		this.Abbreviation=abbreviation;
 	}
 }
