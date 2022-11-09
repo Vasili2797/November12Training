@@ -35,4 +35,13 @@ public class LocationObjectMothers {
 				.withCity(Cities.Seattle)
 				.build();
 	}
+
+	public static LocationObjectMother FlagStaff() {
+		// TODO Auto-generated method stub
+		return new LocationBuilder()
+				.withState(States.Arizona)
+				.withCity(Cities.Flagstaff)
+				.withFlower(Flowers.Saguaro)
+				.build();
+	}
 }

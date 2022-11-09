@@ -37,6 +37,16 @@ public class DataProviderTests {
 
 		Assert.assertEquals(actualCity, expectedCity, "the city name should be returned");
 	}
+	
+	@Test
+	public void canGetStateFlowerFromObjectMother() {
+		var expectedFlower="Saguaro";
+		
+		var actualFlower=LocationObjectMothers.FlagStaff().Flower.Name;
+		
+		Assert.assertEquals(actualFlower, expectedFlower, "the state flower should be returned.");
+		
+	}
 
 	@Test
 	public void canGetNorthCarolina() {
