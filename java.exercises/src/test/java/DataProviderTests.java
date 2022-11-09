@@ -10,7 +10,16 @@ public class DataProviderTests {
 
 		Assert.assertEquals(actualState, expectedState, "The state name should be returned.");
 	}
-
+	
+	@Test
+	public void canGetCity() {
+		var expectedCity="Houston";
+		
+		var actualCity = Cities.Houston.Name;
+		
+		Assert.assertEquals(actualCity, expectedCity, "the city name is wrong");
+	}
+	
 	@Test
 	public void canGetStateAbbreviation() {
 		var expectedAbbreviation="TX";
