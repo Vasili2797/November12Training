@@ -1,5 +1,4 @@
--- 1. Get 10 cities in descending alphabetical order. This Worrks
-
+-- 1. Get 10 cities in descending alphabetical order. This Works
 select * from sakila.city
 order by city desc limit 10;
 
@@ -25,39 +24,32 @@ select sakila.actor.first_name, sakila.actor.last_name, sakila.film.* from sakil
 
 select * from film_view;
 
-
-
--- create view test_view as
--- select * from sakila.actor where last_name="Guiness";
--- select * from test_view;
--- insert into sakila.actor(actor_id, first_name, last_name, last_update)values(999, "John", "Guiness", STR_TO_DATE("10-17-2021 15:40:10", "%m-%d-%Y %H:%i:%s"));
-
-
 -- 7. Use a Stored Procedure to get the 4 inventory ids for the film "Alien Center" at Store #2. 
 -- film_id=15, store_id =2, film_count=1
-Select * from sakila.film where title="Alien Center";
-CALL film_in_stock(15, 2, 1);
-CALL film_not_in_stock(15, 2, 1);
+USE sakila;
+Select film_id from sakila.film where title="Alien Center";
 
+CALL `sakila`.`film_in_stock`((Select film_id from sakila.film where title="Alien Center"), 2, @_count);
+select @_count;
 select * from sakila.store;
 select * from sakila.staff;
 -- 8. Insert a new store. Ensure that you use TRANSACTION. (This one is possible but it's tough! Pay attention to constraints and the order that you are inserting data.)
 -- use sakila;
 Start Transaction;
 Select store_id, manager_staff_id, address_id from sakila.store;
+
 -- update sakila.store as SKST;
 insert into sakila.staff(staff_id, first_name, last_name, address_id, picture,
  email, store_id, active, username, password, last_update)values('3', 'Bob', 'Builder', '5', NULL,
  'Bob.Builder@sakilastaff.com', 2, '1', 'Bob', 'newPassword', STR_TO_DATE('10-17-2021 15:40:10', '%m-%d-%Y %H:%i:%s'));
 insert into sakila.store(store_id, manager_staff_id, address_id)values(3, 3, 3);
 update staff set store_id=3 where staff_id=3;
-commit;
+-- commit;
+rollback;
 
 -- 9. Update the timestamp to the current date/time for the new store you entered in the previous question. 
 -- last_update STR_TO_DATE("10-17-2021 15:40:10", "%m-%d-%Y %H:%i:%s"));
 update store set last_update = now() where store_id=3;
-
-
 
 -- 10. Delete the new store.
 update staff set store_id=2 where staff_id=3;
@@ -72,14 +64,11 @@ select customer.first_name, customer.last_name, SUM(amount) as Total_Amount
 FROM customer inner join payment on customer.customer_id=payment.customer_id group by customer.customer_id
 order by Total_Amount desc limit 3;
 
-
 -- 13. Get all movies rented by the customer who spent the most. (Hint: This will either require nested queries, or more than two joins. one approach is much shorter than the other.)
 select most_paying_customers.*, film.* from (select customer.first_name, customer.last_name, customer.customer_id, SUM(amount) as Total_Amount
 FROM customer inner join payment on customer.customer_id=payment.customer_id group by customer.customer_id
 order by Total_Amount desc limit 3) as most_paying_customers join rental on rental.customer_id=most_paying_customers.customer_id
 join inventory on inventory.inventory_id=rental.inventory_id join film on film.film_id = inventory.film_id;
--- inner join rental.customer_id=customer.customer_id group by customer.customer_id;
-
 
 -- 14. Get the first and last names of all customers who spent more than $150, along with how much they spent.
 select customer.first_name, customer.last_name, SUM(amount) as Total_Amount
