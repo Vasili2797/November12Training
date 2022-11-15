@@ -15,6 +15,11 @@ public class LocationBuilder {
 		this.mother.City=city;
 		return this;
 	}
+	
+	public LocationBuilder withFlower(Flower flower) {
+		this.mother.Flower = flower;
+		return this;
+	}
 
 	public LocationObjectMother build() {
 		

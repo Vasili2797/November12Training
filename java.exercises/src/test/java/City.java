@@ -1,7 +1,6 @@
-public class City {
+public class City extends GeneralData{
 	
-	public String Name;
 	public City(String name) {
-		
+		super(name);
 	}
 }
