@@ -1,0 +1,61 @@
+Test 1 canGetConnectedToWebsite:
+	Ping:	Using ping ampeg.com at IP Address 	[209.126.35.30]
+
+	round trip time took on average 15 milliseconds
+
+	32 bytes of data transferred between the origin IP and destination IP
+
+Test 2 canGetToProductsPage:
+	Go to the website https://ampeg.com/index.html and click on PRODUCTS href link to take me to the Products link on ampeg website 
+	steps:
+		Step 1: Go to the webpage and go to Products page
+		Step 2: Click Rocket Bass Series
+	
+	Expected: take me to the link of Rocket Bass Series
+
+	Result: takes me to the rocket bass link https://ampeg.com/rocket-bass/ and shows me details about Rocket Bass Powerful Combo Amps
+		From The Biggest name in Bass, a working Youtube frame video is on the webpage
+	Rocket Bass sampled sounds work on the webpage
+	All the href links to different social media websites work
+
+Test 3 canLogInWithoutRegisteredAccount:
+	Steps:
+		Step 1: Go to top of home page
+		Step 2: Click the link of class name “account icon” gives a pop up window to sign in using account credentials
+		Step 3: Give unregistered/fake account credentials:
+				username: thisIsMyUserName
+				password: thisIsMyPassword(entered manually)
+				click sign in
+	
+	Expected: throws a user not registered, wrong password declaration
+	Result: takes me to account/login.html web link with error code 286 “Recover Your account here(anchor tag) 
+		if you are having trouble logging in or unsure if you already have a Yamaha Guitar Group Account”
+
+Test 4 canCheckPedalsInHardwareDrop-downMenu:
+	Steps:
+		Step 1: Go to ampeg.com
+		Step 2: click Products href link
+		Step 3: On products page, click Pedals link
+
+		Expected: going to the pedals link and seeing list of pedals
+		Result: see different pedals on the webpage https://ampeg.com/products/pedals/
+
+Test 5 canPurchaseSVT:
+	Steps:
+		Step 1: Go To Ampeg.com
+		Step 2: Click Products
+		Step 3: Click Heritage Series link to navigate to the page
+		Step 4: Click Buy Now on first item “Heritage 50th Anniversary SVT”
+	
+		Expected Result: Shows different purchasing options
+		Actual Result: Gives a pop-up window of different online and local companies that have the product with listed prices
+
+Test 6 canSeeArtistsPage:
+	Steps:
+		Step 1: Go to ampeg.com
+		Step 2: locate ARTISTS tab at the top of page
+		Step 3: click ARTISTS tab
+		Step 4: at the bottom of the page, Artists Roster, click the first entry, Abbi Roth
+		
+		Expected Result: Takes me from main page to the artists page, and clicks Abbi Roth, which then goes to the artist page of Abbi Roth
+		Actual Result: Takes me from index.html page to the artists page, go to the bottom of the page, Click first entry, Abbi Roth, goes to the Abbi Roth page
