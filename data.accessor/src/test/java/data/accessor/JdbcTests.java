@@ -17,7 +17,6 @@ public class JdbcTests{
 
 	@BeforeMethod
 	public void Setup() {
-		//Create dbAccessor instance
 		this.accessor = new DatabaseUtility();
 	}
 	

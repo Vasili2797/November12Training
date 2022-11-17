@@ -11,19 +11,15 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 public class DatabaseUtility implements DatabaseAccessor {
-	/** The name of the MySQL account to use (or empty for anonymous) */
+	
 	private final String userName = "root";
 
-	/** The password for the MySQL account (or empty for anonymous) */
 	private final String password = "password";
 
-	/** The name of the computer running MySQL */
 	private final String serverName = "localhost";
 
-	/** The port of the MySQL server (default is 3306) */
 	private final int portNumber = 3306;
 
-	/** The name of the database we are testing with (this default is installed with MySQL) */
 	private final String dbName = "sakila"; //it should be sakila not test
 	
 	Connection conn;
@@ -31,7 +27,6 @@ public class DatabaseUtility implements DatabaseAccessor {
 		try {
 			conn=getConnection();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -50,7 +45,6 @@ public class DatabaseUtility implements DatabaseAccessor {
 	
 	@Override
 	public String[] ExecuteSingleColumn(String sql) {
-		// TODO Auto-generated method stub
 		DataRow[] results = this.Execute(sql);
 		String[] strArray = new String[results.length];
 		for(int i=0; i<results.length;i++) {
