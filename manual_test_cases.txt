@@ -1,9 +1,11 @@
 Test 1 canGetConnectedToWebsite:
-	Ping:	Using ping ampeg.com at IP Address 	[209.126.35.30]
+	Steps:
+		Step 1: open the command prompt 
+		Step 2: Using Ping order, ping ampeg.com at IP Address [209.126.35.30]
 
-	round trip time took on average 15 milliseconds
+	Expected: Shows no loss of data transfer and time it took to transfer packets. Shows Ping statistics
 
-	32 bytes of data transferred between the origin IP and destination IP
+	Result: round trip time took on average 15 milliseconds 32 bytes of data transferred between the origin IP and destination IP
 
 Test 2 canGetToProductsPage:
 	Go to the website https://ampeg.com/index.html and click on PRODUCTS href link to take me to the Products link on ampeg website 
@@ -28,6 +30,7 @@ Test 3 canLogInWithoutRegisteredAccount:
 				click sign in
 	
 	Expected: throws a user not registered, wrong password declaration
+	
 	Result: takes me to account/login.html web link with error code 286 “Recover Your account here(anchor tag) 
 		if you are having trouble logging in or unsure if you already have a Yamaha Guitar Group Account”
 
@@ -37,8 +40,9 @@ Test 4 canCheckPedalsInHardwareDrop-downMenu:
 		Step 2: click Products href link
 		Step 3: On products page, click Pedals link
 
-		Expected: going to the pedals link and seeing list of pedals
-		Result: see different pedals on the webpage https://ampeg.com/products/pedals/
+	Expected: going to the pedals link and seeing list of pedals
+		
+	Result: see different pedals on the webpage https://ampeg.com/products/pedals/
 
 Test 5 canPurchaseSVT:
 	Steps:
@@ -47,8 +51,9 @@ Test 5 canPurchaseSVT:
 		Step 3: Click Heritage Series link to navigate to the page
 		Step 4: Click Buy Now on first item “Heritage 50th Anniversary SVT”
 	
-		Expected Result: Shows different purchasing options
-		Actual Result: Gives a pop-up window of different online and local companies that have the product with listed prices
+	Expected Result: Shows different purchasing options
+		
+	Actual Result: Gives a pop-up window of different online and local companies that have the product with listed prices
 
 Test 6 canSeeArtistsPage:
 	Steps:
@@ -57,5 +62,6 @@ Test 6 canSeeArtistsPage:
 		Step 3: click ARTISTS tab
 		Step 4: at the bottom of the page, Artists Roster, click the first entry, Abbi Roth
 		
-		Expected Result: Takes me from main page to the artists page, and clicks Abbi Roth, which then goes to the artist page of Abbi Roth
-		Actual Result: Takes me from index.html page to the artists page, go to the bottom of the page, Click first entry, Abbi Roth, goes to the Abbi Roth page
+	Expected Result: Takes me from main page to the artists page, and clicks Abbi Roth, which then goes to the artist page of Abbi Roth
+		
+	Actual Result: Takes me from index.html page to the artists page, go to the bottom of the page, Click first entry, Abbi Roth, goes to the Abbi Roth page
