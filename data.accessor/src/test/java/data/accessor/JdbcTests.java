@@ -20,10 +20,6 @@ public class JdbcTests{
 		this.accessor = new DatabaseUtility();
 	}
 	
-	public void whathappened() {
-		System.out.print("test output");
-	}
-	
 	@Test
 	public void canAccessDatabase() {
 		var result = this.accessor.ExecuteSingleCell("SELECT city FROM sakila.city;");
