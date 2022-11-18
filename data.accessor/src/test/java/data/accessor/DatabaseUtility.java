@@ -10,9 +10,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
-public class DatabaseUtility implements DatabaseAccessor {
+import bsh.This;
+
+public class DatabaseUtility extends DbDemo implements DatabaseAccessor{
 	
-	private final String userName = "root";
+//	private final String userName = "root";
+	String userName=DbDemo.getUserName();
 
 	private final String password = "password";
 
@@ -20,7 +23,7 @@ public class DatabaseUtility implements DatabaseAccessor {
 
 	private final int portNumber = 3306;
 
-	private final String dbName = "sakila"; //it should be sakila not test
+	private final String dbName = "sakila";
 	
 	Connection conn;
 	public DatabaseUtility(){
@@ -31,7 +34,7 @@ public class DatabaseUtility implements DatabaseAccessor {
 		}
 	}
 	
-	private Connection getConnection() throws SQLException {
+	public Connection getConnection() throws SQLException {
 		Connection conn = null;
 		Properties connectionProps = new Properties();
 		connectionProps.put("user", this.userName);

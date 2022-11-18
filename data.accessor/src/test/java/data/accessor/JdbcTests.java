@@ -29,10 +29,10 @@ public class JdbcTests{
 	public void canGetTenCitiesInDescendingOrder(){
 		String getTenRows= "SELECT city FROM sakila.city"
 				+" ORDER BY city DESC LIMIT 10;";
-		var result=this.accessor.ExecuteSingleColumn(getTenRows);
-		
 		String[] expectedArray= new String[]{"Ziguinchor","Zhoushan","Zhezqazghan","Zeleznogorsk",
 				"Zaria","Zapopan","Zaoyang","Zanzibar","Zalantun","Yuzhou",};
+		
+		var result=this.accessor.ExecuteSingleColumn(getTenRows);
 		
 		for(int j=0; j<expectedArray.length;j++) {
 			String row = result[j];

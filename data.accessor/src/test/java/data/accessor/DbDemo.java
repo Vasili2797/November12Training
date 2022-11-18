@@ -42,7 +42,7 @@ import java.util.Properties;
 public class DbDemo {
 
 	/** The name of the MySQL account to use (or empty for anonymous) */
-	private final String userName = "root";
+	private static final String userName = "root";
 
 	/** The password for the MySQL account (or empty for anonymous) */
 	private final String password = "password";
@@ -133,6 +133,10 @@ public class DbDemo {
 		    } catch (SQLException e) {
 		      e.printStackTrace();
 		    }
+	}
+	
+	public static String getUserName() {
+		return userName;
 	}
 	
 	/**
