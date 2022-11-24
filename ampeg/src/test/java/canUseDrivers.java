@@ -11,26 +11,6 @@ import org.testng.annotations.Test;
 
 public class canUseDrivers {
 
-	protected WebDriver chromeDriver;
-
-	protected WebDriver edgeDriver;
-
-	@AfterMethod
-	public void Cleanup() {
-		if (this.chromeDriver != null) {
-			this.chromeDriver.quit();
-		}
-		if (this.edgeDriver != null) {
-			this.edgeDriver.quit();
-		}
-	}
-
-	@BeforeMethod
-	public void startUpMethod() {
-		chromeDriver = chromePath();
-		edgeDriver = msEdgeDriverPath();
-	}
-
 	public WebDriver chromePath() {
 		var ChromeDriverPath = "C:\\Users\\nashv\\Downloads\\chromedriver_win32_1\\chromedriver.exe";
 		System.setProperty("webdriver.chrome.driver", ChromeDriverPath);
@@ -67,27 +47,33 @@ public class canUseDrivers {
 
 		Assert.assertEquals(currentURL, fullURL, "expected Abbi Roth link");
 	}
+	
+	
+	@Test
+	public void canGetConnectedUsingEdgeDriver() { 
+		WebDriver MsEdgeDriver = msEdgeDriverPath();
+		canGetConnectedToWebsiteGeneric(MsEdgeDriver);
+		MsEdgeDriver.quit();
+	}
 
 	@Test
 	public void canGetConnectedUsingChromeDriver() {
-
-		canGetConnectedToWebsiteGeneric(this.chromeDriver);
-
-	}
-
-	@Test
-	public void canGetConnectedUsingEdgeDriver() {
-		canGetConnectedToWebsiteGeneric(this.edgeDriver);
-	}
-
-	@Test
-	public void canSeeArtistsPageUsingChromeDriver() {
-		canConnectToArtistsPage(this.chromeDriver);
+		WebDriver chromePathDriver = chromePath();
+		canGetConnectedToWebsiteGeneric(chromePathDriver);
+		chromePathDriver.quit();
 	}
 
 	@Test
 	public void canSeeArtistsPageUsingEdgeDriver() {
+		WebDriver MsEdgeDriver = msEdgeDriverPath();
+		canConnectToArtistsPage(MsEdgeDriver);
+		MsEdgeDriver.quit();
+	}
 
-		canConnectToArtistsPage(this.edgeDriver);
+	@Test
+	public void canSeeArtistsPageUsingChromeDriver() {
+		WebDriver chromePathDriver = chromePath();
+		canConnectToArtistsPage(chromePathDriver);
+		chromePathDriver.quit();
 	}
 }
