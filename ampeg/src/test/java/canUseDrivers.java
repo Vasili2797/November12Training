@@ -9,7 +9,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class canUseDrivers {
+public class canUseDrivers { // All test run
 
 	public WebDriver chromePath() {
 		var ChromeDriverPath = "C:\\Users\\nashv\\Downloads\\chromedriver_win32_1\\chromedriver.exe";
@@ -33,7 +33,7 @@ public class canUseDrivers {
 		Assert.assertEquals(currentUrl, fullUrl, "Should navigate to the home page using Google Chrome");
 	}
 
-	private void canConnectToArtistsPage(WebDriver driver) {
+	public void canConnectToArtistsPage(WebDriver driver) {
 		var url = "https://ampeg.com/";
 		var addedUrl = "artists/271/Abbi%20Roth";
 		var fullURL = url + addedUrl;
@@ -47,10 +47,9 @@ public class canUseDrivers {
 
 		Assert.assertEquals(currentURL, fullURL, "expected Abbi Roth link");
 	}
-	
-	
+
 	@Test
-	public void canGetConnectedUsingEdgeDriver() { 
+	public void canGetConnectedUsingEdgeDriver() {
 		WebDriver MsEdgeDriver = msEdgeDriverPath();
 		canGetConnectedToWebsiteGeneric(MsEdgeDriver);
 		MsEdgeDriver.quit();
