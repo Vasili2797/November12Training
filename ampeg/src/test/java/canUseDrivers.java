@@ -6,60 +6,88 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class canUseDrivers {
 
-	protected WebDriver driver;
+	protected WebDriver chromeDriver;
+
+	protected WebDriver edgeDriver;
 
 	@AfterMethod
 	public void Cleanup() {
-		if (this.driver == null) {
-			return;
+		if (this.chromeDriver != null) {
+			this.chromeDriver.quit();
 		}
-		this.driver.quit();
+		if (this.edgeDriver != null) {
+			this.edgeDriver.quit();
+		}
 	}
 
-	public void chromePath() {
+	@BeforeMethod
+	public void startUpMethod() {
+		chromeDriver = chromePath();
+		edgeDriver = msEdgeDriverPath();
+	}
+
+	public WebDriver chromePath() {
 		var ChromeDriverPath = "C:\\Users\\nashv\\Downloads\\chromedriver_win32_1\\chromedriver.exe";
 		System.setProperty("webdriver.chrome.driver", ChromeDriverPath);
-		this.driver = new ChromeDriver();
-	}
-	
-	public void msEdgeDriverPath() {
-		var EdgeDriverPath="C:\\Users\\nashv\\Downloads\\edgedriver_win64\\msedgedriver.exe";
-		System.setProperty("webdriver.edge.driver", EdgeDriverPath);
-		this.driver = new EdgeDriver();
+		return new ChromeDriver();
 	}
 
-	@Test
-	public void canGetConnectedToWebsite() {
-		chromePath();
-		
+	public WebDriver msEdgeDriverPath() {
+		var EdgeDriverPath = "C:\\Users\\nashv\\Downloads\\edgedriver_win64\\msedgedriver.exe";
+		System.setProperty("webdriver.edge.driver", EdgeDriverPath);
+		return new EdgeDriver();
+	}
+
+	private void canGetConnectedToWebsiteGeneric(WebDriver driver) {
 		var fullUrl = "https://ampeg.com/index.html";
 		driver.navigate().to(fullUrl);
 		var currentUrl = driver.getCurrentUrl();
 
 		driver.manage().window().maximize();
-		
+
 		Assert.assertEquals(currentUrl, fullUrl, "Should navigate to the home page using Google Chrome");
 	}
 
-	@Test
-	public void canSeeArtistsPage() throws InterruptedException {
-		chromePath();
-		
+	private void canConnectToArtistsPage(WebDriver driver) {
 		var url = "https://ampeg.com/";
 		var addedUrl = "artists/271/Abbi%20Roth";
 		var fullURL = url + addedUrl;
-		
+
 		driver.navigate().to(url);
 		driver.manage().window().maximize();
 		driver.findElement(By.xpath("//a[@href='/artists/']")).click();
 		driver.findElement(By.xpath("//a[@href='/artists/271/Abbi Roth']")).click();
-		
+
 		var currentURL = driver.getCurrentUrl();
 
 		Assert.assertEquals(currentURL, fullURL, "expected Abbi Roth link");
+	}
+
+	@Test
+	public void canGetConnectedUsingChromeDriver() {
+
+		canGetConnectedToWebsiteGeneric(this.chromeDriver);
+
+	}
+
+	@Test
+	public void canGetConnectedUsingEdgeDriver() {
+		canGetConnectedToWebsiteGeneric(this.edgeDriver);
+	}
+
+	@Test
+	public void canSeeArtistsPageUsingChromeDriver() {
+		canConnectToArtistsPage(this.chromeDriver);
+	}
+
+	@Test
+	public void canSeeArtistsPageUsingEdgeDriver() {
+
+		canConnectToArtistsPage(this.edgeDriver);
 	}
 }
