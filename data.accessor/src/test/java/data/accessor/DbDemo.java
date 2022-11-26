@@ -1,4 +1,5 @@
 package data.accessor;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -7,106 +8,45 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
-/**
- * This class demonstrates how to connect to MySQL and run some basic commands.
- * 
- * In order to use this, you have to download the Connector/J driver and add
- * its .jar file to your build path.  You can find it here:
- * 
- * http://dev.mysql.com/downloads/connector/j/
- * 
- * You will see the following exception if it's not in your class path:
- * 
- * java.sql.SQLException: No suitable driver found for jdbc:mysql://localhost:3306/
- * 
- * To add it to your class path:
- * 1. Right click on your project
- * 2. Go to Build Path -> Add External Archives...
- * 3. Select the file mysql-connector-java-5.1.24-bin.jar
- *    NOTE: If you have a different version of the .jar file, the name may be
- *    a little different.
- *    
- * The user name and password are both "root", which should be correct if you followed
- * the advice in the MySQL tutorial. If you want to use different credentials, you can
- * change them below. 
- * 
- * You will get the following exception if the credentials are wrong:
- * 
- * java.sql.SQLException: Access denied for user 'userName'@'localhost' (using password: YES)
- * 
- * You will instead get the following exception if MySQL isn't installed, isn't
- * running, or if your serverName or portNumber are wrong:
- * 
- * java.net.ConnectException: Connection refused
- */
 public class DbDemo {
 
-	/** The name of the MySQL account to use (or empty for anonymous) */
 	private static final String userName = "root";
+	private static final String password = "password";
+	private static final String serverName = "localhost";
+	private static final int portNumber = 3306;
+	private static final String dbName = "sakila";
+	private static final String tableName = "JDBC_TEST";
 
-	/** The password for the MySQL account (or empty for anonymous) */
-	private final String password = "password";
-
-	/** The name of the computer running MySQL */
-	private final String serverName = "localhost";
-
-	/** The port of the MySQL server (default is 3306) */
-	private final int portNumber = 3306;
-
-	/** The name of the database we are testing with (this default is installed with MySQL) */
-	private final String dbName = "sakila"; //it should be sakila not test
-	
-	/** The name of the table we are testing with */
-	private final String tableName = "JDBC_TEST";
-	
-	/**
-	 * Get a new database connection
-	 * 
-	 * @return
-	 * @throws SQLException
-	 */
 	public Connection getConnection() throws SQLException {
 		Connection conn = null;
 		Properties connectionProps = new Properties();
 		connectionProps.put("user", this.userName);
 		connectionProps.put("password", this.password);
 
-		conn = DriverManager.getConnection("jdbc:mysql://"
-				+ this.serverName + ":" + this.portNumber + "/" + this.dbName,
-				connectionProps);
+		conn = DriverManager.getConnection(
+				"jdbc:mysql://" + this.serverName + ":" + this.portNumber + "/" + this.dbName, connectionProps);
 
 		return conn;
 	}
-	/**
-	 * Run a SQL command which does not return a recordset:
-	 * CREATE/INSERT/UPDATE/DELETE/DROP/etc.
-	 * 
-	 * @throws SQLException If something goes wrong
-	 */
+
 	public boolean executeUpdate(Connection conn, String command) throws SQLException {
-	    Statement stmt = null;
-	    try {
-	        stmt = conn.createStatement();
-	        stmt.executeUpdate(command); // This will throw a SQLException if it fails
-	        return true;
-	    } finally {
-
-	    	// This will run whether we throw an exception or not
-	        if (stmt != null) { stmt.close(); }
-	    }
+		Statement stmt = null;
+		try {
+			stmt = conn.createStatement();
+			stmt.executeUpdate(command);
+			return true;
+		} finally {
+			if (stmt != null) {
+				stmt.close();
+			}
+		}
 	}
-	
+
 	private String getJdbcUrl() {
-		return "jdbc:mysql://"
-				+ this.serverName + ":" + this.portNumber + "/" + this.dbName;
+		return "jdbc:mysql://" + this.serverName + ":" + this.portNumber + "/" + this.dbName;
 	}
-	
-	/**
-	 * Connect to MySQL and do some stuff.
-	 */
-	public void run() {
 
-		// Connect to MySQL
+	public void run() {
 		Connection conn;
 		try {
 			conn = this.getConnection();
@@ -116,32 +56,23 @@ public class DbDemo {
 			e.printStackTrace();
 			return;
 		}
-		String sqlToExecute = "select * from sakila.city\r\n"
-				+ "order by city desc limit 10";
-		
+		String sqlToExecute = "select * from sakila.city\r\n" + "order by city desc limit 10";
+
 		try (Statement stmt = conn.createStatement()) {
-		      ResultSet rs = stmt.executeQuery(sqlToExecute);
-		      while (rs.next()) {
-		        String supplierID = rs.getString("city_id");
-		        String price = rs.getString("city");
-		        int sales = rs.getInt("country_id");
-		        Date total = rs.getDate("last_update");
-		        
-		        System.out.println(supplierID + ", " + price +
-		                           ", " + sales + ", " + total);
-		      }
-		    } catch (SQLException e) {
-		      e.printStackTrace();
-		    }
+			ResultSet rs = stmt.executeQuery(sqlToExecute);
+			while (rs.next()) {
+				String supplierID = rs.getString("city_id");
+				String price = rs.getString("city");
+				int sales = rs.getInt("country_id");
+				Date total = rs.getDate("last_update");
+
+				System.out.println(supplierID + ", " + price + ", " + sales + ", " + total);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
-	
-	public static String getUserName() {
-		return userName;
-	}
-	
-	/**
-	 * Connect to the DB and do some stuff
-	 */
+
 	public static void main(String[] args) {
 		DbDemo app = new DbDemo();
 		app.run();
