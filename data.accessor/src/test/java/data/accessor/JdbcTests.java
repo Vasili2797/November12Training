@@ -33,11 +33,7 @@ public class JdbcTests {
 
 		var result = this.accessor.ExecuteSingleColumn(getTenRows);
 
-		for (int j = 0; j < expectedArray.length; j++) {
-			String row = result[j];
-			Assert.assertEquals(expectedArray[j], row);
-		}
-		Assert.assertEquals(result.length, expectedArray.length);
+		Assert.assertEquals(result, expectedArray);
 	}
 
 	@Test
@@ -59,10 +55,13 @@ public class JdbcTests {
 	public void getFourInventoryIDs() {
 		String sqlStatementsToComplete = "CALL `sakila`.`film_in_stock`((Select film_id from sakila.film where title=\"Alien Center\"), 2, @_count);";
 		var result = this.accessor.Execute(sqlStatementsToComplete);
+
 		String[] expectedArray = new String[] { "73", "74", "75", "76" };
+		String[] resultConverted = new String[result.length];
+
 		for (int i = 0; i < result.length; i++) {
-			Assert.assertEquals(result[i].getValue(result[i].GetColumns()[0]), expectedArray[i]);
+			resultConverted[i] = result[i].getValue(result[i].GetColumns()[0]);
 		}
-		Assert.assertEquals(result.length, expectedArray.length);
+		Assert.assertEquals(resultConverted, expectedArray);
 	}
 }
