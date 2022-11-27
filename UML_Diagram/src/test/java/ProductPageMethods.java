@@ -1,9 +1,24 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class ProductPageMethods {
+
+	public void canGetToProductsPage(WebDriver driver) {
+		var url = "https://ampeg.com/";
+		var addedUrl = "products/";
+		var fullUrl = url.concat(addedUrl);
+
+		driver.navigate().to(url);
+		driver.manage().window().maximize();
+		driver.findElement(By.xpath("//a[@href='/products/']")).click();
+		var currentUrl = driver.getCurrentUrl();
+
+		Assert.assertEquals(currentUrl/* actual */, fullUrl/* expected */,
+				"Should navigate to the products page using Google Chrome");
+	}
 
 	public void canGetToPedalsPage(WebDriver driver) {
 
@@ -17,17 +32,58 @@ public class ProductPageMethods {
 		driver.findElement(By.xpath("//a[@href='/products/pedals/splash']")).click();
 
 		var currentUrl = driver.getCurrentUrl();
-		Assert.assertEquals(fullURL, currentUrl, "Should navigate to the pedals page");
+		Assert.assertEquals(currentUrl, fullURL, "Should navigate to the pedals page");
+	}
+
+	public void canSeeArtistsPage(WebDriver driver) {
+		var url = "https://ampeg.com/";
+		var addedUrl = "artists/271/Abbi%20Roth";
+		var fullURL = url + addedUrl;
+
+		driver.navigate().to(url);
+		driver.manage().window().maximize();
+		driver.findElement(By.xpath("//a[@href='/artists/']")).click();
+		driver.findElement(By.xpath("//a[@href='/artists/271/Abbi Roth']")).click();
+
+		var currentURL = driver.getCurrentUrl();
+
+		Assert.assertEquals(currentURL, fullURL, "expected Abbi Roth link");
+	}
+
+	public void canPurchaseSVT(WebDriver driver) {
+		var url = "https://ampeg.com/";
+		var addedUrl = "products/heritage/";
+		var fullURL = url.concat(addedUrl);
+
+		driver.navigate().to(url);
+		driver.manage().window().maximize();
+		driver.findElement(By.xpath("//a[@href='/products/']")).click();
+		driver.findElement(By.xpath("//a[@href='/products/heritage/splash']")).click();
+		driver.findElement(By.xpath("//*[@id='first-prod']//a[@href='#obn']")).click();
+
+		var currentURL = driver.getCurrentUrl();
+
+		Assert.assertEquals(currentURL, fullURL);
 	}
 
 	@Test
-	public void canCheckPedalsUsingMSEdge() {
+	public void canSeeArtistsPageUsingChrome() {
 
+		DriverManagerFactory DMV = new DriverManagerFactory();
+		DriverManager GenericDriverManager = DMV.getManager("Chrome");
+		WebDriver driver = GenericDriverManager.getDriver();
+
+		canSeeArtistsPage(driver);
+		driver.quit();
+	}
+
+	@Test
+	public void canSeeArtistsPageUsingEdge() {
 		DriverManagerFactory DMV = new DriverManagerFactory();
 		DriverManager GenericDriverManager = DMV.getManager("Edge");
 		WebDriver driver = GenericDriverManager.getDriver();
 
-		canGetToPedalsPage(driver);
+		canSeeArtistsPage(driver);
 		driver.quit();
 	}
 
@@ -42,28 +98,14 @@ public class ProductPageMethods {
 		driver.quit();
 	}
 
-	public void canGetToProductsPage(WebDriver driver) {
-		var url = "https://ampeg.com/";
-		var addedUrl = "products/";
-		var fullUrl = url.concat(addedUrl);
-
-		driver.navigate().to(url);
-		driver.manage().window().maximize();
-		driver.findElement(By.xpath("//a[@href='/products/']")).click();
-		var currentUrl = driver.getCurrentUrl();
-
-		Assert.assertEquals(fullUrl/* actual */, currentUrl/* expected */,
-				"Should navigate to the products page using Google Chrome");
-	}
-
 	@Test
-	public void canGetToProductsPageInMSEdge() {
+	public void canCheckPedalsUsingMSEdge() {
 
 		DriverManagerFactory DMV = new DriverManagerFactory();
 		DriverManager GenericDriverManager = DMV.getManager("Edge");
 		WebDriver driver = GenericDriverManager.getDriver();
 
-		canGetToProductsPage(driver);
+		canGetToPedalsPage(driver);
 		driver.quit();
 	}
 
@@ -78,4 +120,34 @@ public class ProductPageMethods {
 		driver.quit();
 	}
 
+	@Test
+	public void canGetToProductsPageInMSEdge() {
+
+		DriverManagerFactory DMV = new DriverManagerFactory();
+		DriverManager GenericDriverManager = DMV.getManager("Edge");
+		WebDriver driver = GenericDriverManager.getDriver();
+
+		canGetToProductsPage(driver);
+		driver.quit();
+	}
+
+	@Test
+	public void canPurchaseSVTInChrome() {
+		DriverManagerFactory DMV = new DriverManagerFactory();
+		DriverManager GenericDriverManager = DMV.getManager("Chrome");
+		WebDriver driver = GenericDriverManager.getDriver();
+
+		canPurchaseSVT(driver);
+		driver.quit();
+	}
+
+	@Test
+	public void canPurchaseSVTInEdge() {
+		DriverManagerFactory DMV = new DriverManagerFactory();
+		DriverManager GenericDriverManager = DMV.getManager("Edge");
+		WebDriver driver = GenericDriverManager.getDriver();
+
+		canPurchaseSVT(driver);
+		driver.quit();
+	}
 }
