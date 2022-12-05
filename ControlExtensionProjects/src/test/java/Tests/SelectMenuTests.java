@@ -1,6 +1,8 @@
 package Tests;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -36,7 +38,7 @@ public class SelectMenuTests {
 	}
 
 	@Test
-	public void getAllOptionsInStringArray() {
+	public void getAllOptionsInStringArray() {//They are they same, but assertEquals says not true
 
 		var driverPath = "C:\\Users\\nashv\\Downloads\\chromedriver_win32_1\\chromedriver.exe";
 		System.setProperty("webdriver.chrome.driver", driverPath);
@@ -50,13 +52,29 @@ public class SelectMenuTests {
 		Select select = new Select(t);
 
 		List<WebElement> optionList = select.getOptions();
-		
-		String[] strArray = new String[optionList.size()];
-		for (WebElement option : optionList) {
-			String gettingOptions = option.getText();
-			System.out.println(gettingOptions);
-		}
-		driver.quit();
 
+		List<String> stringArray = new ArrayList<String>();
+		for (WebElement e : optionList) {
+			stringArray.add(e.getText());
+		}
+		String[] str = new String[optionList.size()];
+		for (int i = 0; i < stringArray.size(); i++) {
+			str[i] = stringArray.get(i);
+		}
+
+		String[] ValuesOnline = new String[] { "Red", "Blue", "Green", "Yellow", "Purple", "Black", "White", "Voilet",
+				"Indigo", "Magenta", "Aqua" };
+
+//		StringBuilder stringBuilder = new StringBuilder();
+//		for (int i = 0; i < ValuesOnline.length; i++) {
+//			stringBuilder.append(ValuesOnline[i] + ", ");
+//		}
+		var expected = Arrays.toString(ValuesOnline);
+//		System.out.println(Arrays.toString(ValuesOnline));
+//		System.out.println("The StringBuilder "+stringBuilder);
+
+		Assert.assertEquals(stringArray/* actual */, expected/* expected */);
+
+		driver.quit();
 	}
 }
