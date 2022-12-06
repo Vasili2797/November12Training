@@ -1,8 +1,6 @@
 package DriverManagers;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.testng.Assert;
 
 public class EdgeDriverManager extends DriverManager {
 
