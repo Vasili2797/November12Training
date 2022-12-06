@@ -8,15 +8,13 @@ public class EdgeDriverManager extends DriverManager {
 
 	@Override
 	public void createDriver() {
-		var driverPath = "C:\\Users\\nashv\\Downloads\\edgedriver_win64\\msedgedriver.exe";
-		System.setProperty("webdriver.edge.driver", driverPath);
-		WebDriver driver = new EdgeDriver();
-		driver.get("https://www.google.com/");
+		var edgeDriverPath = "C:\\Users\\nashv\\Downloads\\edgedriver_win64\\msedgedriver.exe";
+		System.setProperty("webdriver.edge.driver", edgeDriverPath);
 
-		var expectedResult = "https://www.google.com/";
-		var result = driver.getCurrentUrl();
+		this.driver = new EdgeDriver();
+	}
 
-		Assert.assertEquals(result, expectedResult);
-		driver.quit();
+	public EdgeDriverManager() {
+		this.createDriver();
 	}
 }

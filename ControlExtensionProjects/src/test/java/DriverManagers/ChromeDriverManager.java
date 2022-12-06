@@ -8,16 +8,16 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class ChromeDriverManager extends DriverManager {
-
 	@Override
 	public void createDriver() {
 
-		var driverPath = "C:\\Users\\nashv\\Downloads\\chromedriver_win32_1\\chromedriver.exe";
-		System.setProperty("webdriver.chrome.driver", driverPath);
+		var ChromeDriverPath = "C:\\Users\\nashv\\Downloads\\chromedriver_win32_1\\chromedriver.exe";
+		System.setProperty("webdriver.chrome.driver", ChromeDriverPath);
 
-		WebDriver driver = new ChromeDriver();
-		
-		driver.manage().window().maximize();
+		this.driver = new ChromeDriver();
+	}
 
+	public ChromeDriverManager() {
+		this.createDriver();
 	}
 }

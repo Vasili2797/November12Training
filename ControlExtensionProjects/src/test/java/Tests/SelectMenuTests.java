@@ -1,34 +1,22 @@
 package Tests;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Action;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import DriverManagers.DriverManager;
+import DriverManagers.DriverManagerFactory;
+
 public class SelectMenuTests {
 	WebDriver driver;
 
-	@Test
-	public void getThirdOptionInStringArray() {
-		// ChromeDriverManager();
-		var driverPath = "C:\\Users\\nashv\\Downloads\\chromedriver_win32_1\\chromedriver.exe";
-		System.setProperty("webdriver.chrome.driver", driverPath);
-
-		WebDriver driver = new ChromeDriver();
-
-		driver.manage().window().maximize();
+	public void getThirdOptionInStringArray(WebDriver driver) {
 		driver.get("https://demoqa.com/select-menu");
 
 		WebElement t = driver.findElement(By.id("oldSelectMenu"));
@@ -41,19 +29,23 @@ public class SelectMenuTests {
 		System.out.println(selectedOption);
 
 		Assert.assertEquals(selectedOption, "Yellow", "Zero-index list. Fourth element expected");
+
+	}
+
+	@Test
+	public void thirdOptionInStringArrayUsingChromeDriver() {
+		DriverManagerFactory DMV = new DriverManagerFactory();
+		DriverManager genericDriverManager = DMV.getManager("chrome");
+		WebDriver driver = genericDriverManager.getDriver();
+		driver.manage().window().maximize();
+		getThirdOptionInStringArray(driver);
 		driver.quit();
 	}
 
 	@Test
-	public void getAllOptionsInStringArray() {// They are the same, but assertEquals says not true
+	public void getAllOptionsInStringArray(WebDriver driver) {// They are the same, but assertEquals says not true
 
-		var driverPath = "C:\\Users\\nashv\\Downloads\\chromedriver_win32_1\\chromedriver.exe";
-		System.setProperty("webdriver.chrome.driver", driverPath);
-
-		WebDriver driver = new ChromeDriver();
 		driver.get("https://demoqa.com/select-menu");
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
 
 		WebElement t = driver.findElement(By.id("oldSelectMenu"));
 		Select select = new Select(t);
@@ -80,30 +72,49 @@ public class SelectMenuTests {
 	}
 
 	@Test
-	public void getTwoSelectedOptions() {
-		var driverPath = "C:\\Users\\nashv\\Downloads\\chromedriver_win32_1\\chromedriver.exe";
-		System.setProperty("webdriver.chrome.driver", driverPath);
+	public void getAllOptionsInStringArrayUsingChromeDriver() {
 
-		WebDriver driver = new ChromeDriver();
-		driver.get("https://demoqa.com/select-menu");
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		DriverManagerFactory DMV = new DriverManagerFactory();
+		DriverManager genericDriverManager = DMV.getManager("chrome");
+		WebDriver driver = genericDriverManager.getDriver();
 		driver.manage().window().maximize();
+		getAllOptionsInStringArray(driver);
+		driver.quit();
+	}
 
-		Select select = new Select(driver.findElement(By.id("cars")));
+	public void getTwoSelectedOptions(WebDriver driver) {// I have the same issue as the previous test
+
+		driver.get("https://demoqa.com/select-menu");
+
+		WebElement t = driver.findElement(By.xpath("//select[@id='cars']"));
+
+		Select select = new Select(t);
 		select.selectByIndex(1);
 		select.selectByIndex(2);
 
 		List<WebElement> list = select.getAllSelectedOptions();
-		list.stream().toArray();
-
-		String[] strArray = new String[list.size()];
-
-		for (WebElement i : list) {
-			for (int j = 0; j <= 2; j++) {
-				strArray[j] = i.getText();
-				System.out.println(strArray[j]);
-			}
-
+		List<String> str = new ArrayList<String>();
+		for (WebElement e : list) {
+			str.add(e.getText());
 		}
+
+		String[] expectedInArray = { "Saab", "Opel" };
+
+		var expected = Arrays.toString(expectedInArray);
+		var actual = str;
+
+		Assert.assertEquals(actual, expected);
+		driver.quit();
+	}
+
+	@Test
+	public void getTwoSelectedOptionsUsingChromeDriver() {
+
+		DriverManagerFactory DMV = new DriverManagerFactory();
+		DriverManager genericDriverManager = DMV.getManager("chrome");
+		WebDriver driver = genericDriverManager.getDriver();
+		driver.manage().window().maximize();
+		getTwoSelectedOptions(driver);
+		driver.quit();
 	}
 }
