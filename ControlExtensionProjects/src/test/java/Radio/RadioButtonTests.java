@@ -4,10 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import DriverManagers.ChromeDriverManager;
 import DriverManagers.DriverManager;
 import DriverManagers.DriverManagerFactory;
 
@@ -61,7 +59,19 @@ public class RadioButtonTests {
 	}
 
 	@Test
-	public void canGetImpressiveButtonUsingChrome() {
+	public void canGetYesButtonUsingEdgeDriver() {
+		DriverManagerFactory DMV = new DriverManagerFactory();
+		DriverManager genericDriverManager = DMV.getManager("edge");
+		WebDriver driver = genericDriverManager.getDriver();
+
+		driver.manage().window().maximize();
+		getYesButton(driver);
+
+		driver.quit();
+	}
+
+	@Test
+	public void canGetImpressiveButtonUsingChromeDriver() {
 		DriverManagerFactory DMV = new DriverManagerFactory();
 		DriverManager genericDriverManager = DMV.getManager("chrome");
 		WebDriver driver = genericDriverManager.getDriver();
@@ -73,9 +83,33 @@ public class RadioButtonTests {
 	}
 
 	@Test
-	public void canGetNoButtonUsingChrome() {
+	public void canGetImpressiveButtonUsingEdgeDriver() {
+		DriverManagerFactory DMV = new DriverManagerFactory();
+		DriverManager genericDriverManager = DMV.getManager("edge");
+		WebDriver driver = genericDriverManager.getDriver();
+
+		driver.manage().window().maximize();
+		getImpressiveButton(driver);
+
+		driver.quit();
+	}
+
+	@Test
+	public void canGetNoButtonUsingChromeDriver() {
 		DriverManagerFactory DMV = new DriverManagerFactory();
 		DriverManager genericDriverManager = DMV.getManager("chrome");
+		WebDriver driver = genericDriverManager.getDriver();
+
+		driver.manage().window().maximize();
+		getNoButton(driver);
+
+		driver.quit();
+	}
+
+	@Test
+	public void canGetNoButtonUsingEdgeDriver() {
+		DriverManagerFactory DMV = new DriverManagerFactory();
+		DriverManager genericDriverManager = DMV.getManager("edge");
 		WebDriver driver = genericDriverManager.getDriver();
 
 		driver.manage().window().maximize();
