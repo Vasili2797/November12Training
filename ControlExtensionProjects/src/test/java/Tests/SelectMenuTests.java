@@ -32,17 +32,6 @@ public class SelectMenuTests {
 
 	}
 
-	@Test
-	public void thirdOptionInStringArrayUsingChromeDriver() {
-		DriverManagerFactory DMV = new DriverManagerFactory();
-		DriverManager genericDriverManager = DMV.getManager("chrome");
-		WebDriver driver = genericDriverManager.getDriver();
-		driver.manage().window().maximize();
-		getThirdOptionInStringArray(driver);
-		driver.quit();
-	}
-
-	@Test
 	public void getAllOptionsInStringArray(WebDriver driver) {// They are the same, but assertEquals says not true
 
 		driver.get("https://demoqa.com/select-menu");
@@ -66,19 +55,8 @@ public class SelectMenuTests {
 
 		var expected = Arrays.toString(ValuesOnline);
 
-		Assert.assertEquals(stringArray/* actual */, expected/* expected */);
+		Assert.assertEquals(stringArray, expected, "Should Have the same values");
 
-		driver.quit();
-	}
-
-	@Test
-	public void getAllOptionsInStringArrayUsingChromeDriver() {
-
-		DriverManagerFactory DMV = new DriverManagerFactory();
-		DriverManager genericDriverManager = DMV.getManager("chrome");
-		WebDriver driver = genericDriverManager.getDriver();
-		driver.manage().window().maximize();
-		getAllOptionsInStringArray(driver);
 		driver.quit();
 	}
 
@@ -108,10 +86,63 @@ public class SelectMenuTests {
 	}
 
 	@Test
+	public void thirdOptionInStringArrayUsingChromeDriver() {
+		DriverManagerFactory DMV = new DriverManagerFactory();
+		DriverManager genericDriverManager = DMV.getManager("chrome");
+		WebDriver driver = genericDriverManager.getDriver();
+		driver.manage().window().maximize();
+		getThirdOptionInStringArray(driver);
+		driver.quit();
+	}
+
+	@Test
+	public void thirdOptionInStringArrayUsingEdgeDriver() {
+		DriverManagerFactory DMV = new DriverManagerFactory();
+		DriverManager genericDriverManager = DMV.getManager("edge");
+		WebDriver driver = genericDriverManager.getDriver();
+		driver.manage().window().maximize();
+		getThirdOptionInStringArray(driver);
+		driver.quit();
+	}
+
+	@Test
+	public void getAllOptionsInStringArrayUsingChromeDriver() {
+
+		DriverManagerFactory DMV = new DriverManagerFactory();
+		DriverManager genericDriverManager = DMV.getManager("chrome");
+		WebDriver driver = genericDriverManager.getDriver();
+		driver.manage().window().maximize();
+		getAllOptionsInStringArray(driver);
+		driver.quit();
+	}
+
+	@Test
+	public void getAllOptionsInStringArrayUsingEdgeDriver() {
+
+		DriverManagerFactory DMV = new DriverManagerFactory();
+		DriverManager genericDriverManager = DMV.getManager("edge");
+		WebDriver driver = genericDriverManager.getDriver();
+		driver.manage().window().maximize();
+		getAllOptionsInStringArray(driver);
+		driver.quit();
+	}
+
+	@Test
 	public void getTwoSelectedOptionsUsingChromeDriver() {
 
 		DriverManagerFactory DMV = new DriverManagerFactory();
 		DriverManager genericDriverManager = DMV.getManager("chrome");
+		WebDriver driver = genericDriverManager.getDriver();
+		driver.manage().window().maximize();
+		getTwoSelectedOptions(driver);
+		driver.quit();
+	}
+
+	@Test
+	public void getTwoSelectedOptionsUsingEdgeDriver() {
+
+		DriverManagerFactory DMV = new DriverManagerFactory();
+		DriverManager genericDriverManager = DMV.getManager("edge");
 		WebDriver driver = genericDriverManager.getDriver();
 		driver.manage().window().maximize();
 		getTwoSelectedOptions(driver);
