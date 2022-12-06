@@ -8,56 +8,79 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import DriverManagers.ChromeDriverManager;
+import DriverManagers.DriverManager;
+import DriverManagers.DriverManagerFactory;
 
 public class RadioButtonTests {
 
-	@Test
-	public void canGetYesButton() {
-		var driverPath = "C:\\Users\\nashv\\Downloads\\chromedriver_win32_1\\chromedriver.exe";
-		System.setProperty("webdriver.chrome.driver", driverPath);
-		WebDriver driver = new ChromeDriver();
-
+	public void getYesButton(WebDriver driver) {
 		driver.get("https://demoqa.com/radio-button");
 		driver.manage().window().maximize();
+
 		driver.findElement(By.className("custom-control-label")).click();
 
 		var result = driver.findElement(By.xpath("//span[contains(text(), 'Yes')]")).getText();
-		driver.quit();
 
 		Assert.assertEquals(result, "Yes", "Should return Yes");
-
 	}
 
-	@Test
-	public void canGetImpressiveButton() {
-
-		var driverPath = "C:\\Users\\nashv\\Downloads\\chromedriver_win32_1\\chromedriver.exe";
-		System.setProperty("webdriver.chrome.driver", driverPath);
-		WebDriver driver = new ChromeDriver();
-
+	public void getImpressiveButton(WebDriver driver) {
 		driver.get("https://demoqa.com/radio-button");
 		driver.manage().window().maximize();
+
 		WebElement element = driver.findElement(By.id("impressiveRadio"));
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click()", element);
+
 		var result = driver.findElement(By.xpath("//span[contains(text(), 'Impressive')]")).getText();
-		driver.quit();
+
 		Assert.assertEquals(result, "Impressive", "Should return Impressive");
 	}
 
-	// The no button is not clickable
-	@Test
-	public void canGetNoButton() {
-		var driverPath = "C:\\Users\\nashv\\Downloads\\chromedriver_win32_1\\chromedriver.exe";
-		System.setProperty("webdriver.chrome.driver", driverPath);
-		WebDriver driver = new ChromeDriver();
-
+	public void getNoButton(WebDriver driver) {
 		driver.get("https://demoqa.com/radio-button");
 		driver.manage().window().maximize();
+
 		WebElement element = driver.findElement(By.id("noRadio"));
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click()", element);
-		driver.quit();
 
+		Assert.assertFalse(element.isEnabled());
+	}
+
+	@Test
+	public void canGetYesButtonUsingChromeDriver() {
+		DriverManagerFactory DMV = new DriverManagerFactory();
+		DriverManager genericDriverManager = DMV.getManager("chrome");
+		WebDriver driver = genericDriverManager.getDriver();
+
+		driver.manage().window().maximize();
+		getYesButton(driver);
+
+		driver.quit();
+	}
+
+	@Test
+	public void canGetImpressiveButtonUsingChrome() {
+		DriverManagerFactory DMV = new DriverManagerFactory();
+		DriverManager genericDriverManager = DMV.getManager("chrome");
+		WebDriver driver = genericDriverManager.getDriver();
+
+		driver.manage().window().maximize();
+		getImpressiveButton(driver);
+
+		driver.quit();
+	}
+
+	@Test
+	public void canGetNoButtonUsingChrome() {
+		DriverManagerFactory DMV = new DriverManagerFactory();
+		DriverManager genericDriverManager = DMV.getManager("chrome");
+		WebDriver driver = genericDriverManager.getDriver();
+
+		driver.manage().window().maximize();
+		getNoButton(driver);
+
+		driver.quit();
 	}
 }
