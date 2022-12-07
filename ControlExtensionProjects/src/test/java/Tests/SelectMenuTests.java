@@ -26,13 +26,12 @@ public class SelectMenuTests {
 
 		WebElement o = select.getFirstSelectedOption();
 		String selectedOption = o.getText();
-		System.out.println(selectedOption);
 
 		Assert.assertEquals(selectedOption, "Yellow", "Zero-index list. Fourth element expected");
 
 	}
 
-	public void getAllOptionsInStringArray(WebDriver driver) {// They are the same, but assertEquals says not true
+	public void getAllOptionsInStringArray(WebDriver driver) {
 
 		driver.get("https://demoqa.com/select-menu");
 
@@ -53,14 +52,14 @@ public class SelectMenuTests {
 		String[] ValuesOnline = new String[] { "Red", "Blue", "Green", "Yellow", "Purple", "Black", "White", "Voilet",
 				"Indigo", "Magenta", "Aqua" };
 
-		var expected = Arrays.toString(ValuesOnline);
+		var expected = Arrays.asList(ValuesOnline);
 
 		Assert.assertEquals(stringArray, expected, "Should Have the same values");
 
 		driver.quit();
 	}
 
-	public void getTwoSelectedOptions(WebDriver driver) {// I have the same issue as the previous test
+	public void getTwoSelectedOptions(WebDriver driver) {
 
 		driver.get("https://demoqa.com/select-menu");
 
@@ -78,7 +77,7 @@ public class SelectMenuTests {
 
 		String[] expectedInArray = { "Saab", "Opel" };
 
-		var expected = Arrays.toString(expectedInArray);
+		var expected = Arrays.asList(expectedInArray);
 		var actual = str;
 
 		Assert.assertEquals(actual, expected);
