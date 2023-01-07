@@ -26,14 +26,28 @@ Use Junit as the test framework.
 
 import org.junit.Test;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.matcher.ResponseAwareMatcher;
 import io.restassured.response.Response;
+import io.restassured.response.ResponseBody;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.Date;
+import java.util.logging.Logger;
 
 import org.hamcrest.Matcher;
 import org.json.simple.JSONObject;
@@ -45,8 +59,11 @@ public class JUnitTestClass {
 	@Test
 	public void test_1() { // This test passes
 
-		given().get("https://reqres.in/api/users/2").then().statusCode(200).body("data.id", equalTo(2))
-				.body("data.email", equalTo("janet.weaver@reqres.in"));
+		Response response = RestAssured.get("https://reqres.in/api/users/2");
+		response.then().statusCode(200)
+				.body("data.id", equalTo(2)).body("data.email", equalTo("janet.weaver@reqres.in"));
+		int statusCode =response.getStatusCode();
+		assertEquals(statusCode, 200);
 
 	}
 
@@ -99,22 +116,61 @@ public class JUnitTestClass {
 		request.put("name", "morpheus2");
 
 		baseURI = "https://reqres.in/";
-		given().header("Content-Type", "application/json").contentType(ContentType.JSON).accept(ContentType.JSON)
-				.body(request.toJSONString()).when().put("api/users/2").then().statusCode(200).log().all();
+		Response response = RestAssured.
+		given().header("Content-Type", "application/json").contentType(ContentType.JSON).accept(ContentType.JSON).body(request.toJSONString())
+		.when().patch("api/users/2");// .then().statusCode(200).log().body();
+		
+		request.values().stream().forEach(System.out::println);
+		response.then().log().all();
+		
+		String responseTime = response.then().extract().path("updatedAt");
+		String nameChanged = response.then().extract().path("name");
+		long timeItTook = response.getTime();
+		
+//		System.out.println(timeItTook);
+		
+		System.out.println(responseTime);
+//		System.out.println(nameChanged);
+		System.out.println(java.time.LocalDateTime.now());
+		
+		assertEquals("morpheus2", nameChanged, "The name should be morpheus2"); //make sure the name was changed
+//		assertEquals(responseTime, java.time.LocalDateTime.now());// make sure that the time is current
 	}
 
 //	(PUT) Write a test that updates 'Morpheus' to 'Morpheus2'. Ensure that UpdatedAt timestamp is updated and that the name was updated.
 
 	@Test
 	public void putMorpheus2() {
-		String requestBody = "{\n" +
-	            "  \"title\": \"foo\",\n" +
-	            "  \"body\": \"baz\",\n" +
-	            "  \"userId\": \"1\",\n" +
-	            "  \"id\": \"1\" \n}";
-		Response response = given().header("Content-Type","application/json")
-				.and().body(requestBody).when().put("").then().extract().response();
+		String requestBody = "{\n" + "  \"title\": \"foo\",\n" + "  \"body\": \"baz\",\n" + "  \"userId\": \"1\",\n"
+				+ "  \"id\": \"1\" \n}";
+		Response response = given().header("Content-Type", "application/json").and().body(requestBody).when().put("")
+				.then().extract().response();
 		System.out.println(response);
+	}
+	
+//	(GET single user). Deserialize the user data into an object.
+	
+	@Test
+	public void deserializeDataIntoObject() throws JsonProcessingException{
+		
+		Response response = RestAssured.get("https://reqres.in/api/users/2");
+//		response.then().statusCode(200)
+//				.body("data.id", equalTo(2)).body("data.email", equalTo("janet.weaver@reqres.in"));
+//		int statusCode =response.getStatusCode();
+//		assertEquals(statusCode, 200);
+		
+//		var baseURL = "https://reqres.in/";
+//		Response response = RestAssured.post(baseURL + "api/login");
+//		response.prettyPrint();
+//		Response response2 = RestAssured.get("");
+		
+//		response.body().prettyPrint();
+		ObjectMapper objectMapper = new ObjectMapper();
+//		objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+		String jsonString = objectMapper.writeValueAsString(response);
+		System.out.println(jsonString);
+		
+		
 	}
 
 }
