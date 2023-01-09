@@ -1,21 +1,9 @@
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-import io.restassured.response.Response;
-
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
-import static org.testng.Assert.assertEquals;
-
-import java.time.LocalDateTime;
-
-import org.json.simple.JSONObject;
 
 public class JUnitTestClass {
 
@@ -53,7 +41,7 @@ public class JUnitTestClass {
 
 	@Test
 	public void putMorpheus2_test_5() {
-		test5 newTest = new test5();
+		Test5 newTest = new Test5();
 		newTest.putMorpheus2();
 	}
 

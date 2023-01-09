@@ -5,26 +5,24 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
-import static io.restassured.RestAssured.*;
 import static org.testng.Assert.assertEquals;
 
 import org.json.simple.JSONObject;
 
-public class Test4 { //Cannot get the time to cooperate
+public class Test4 { // Cannot get the time to cooperate
 //	(PATCH) Write a test that updates 'Morpheus' to 'Morpheus2'. Ensure that UpdatedAt timestamp is updated and that the name was updated.
-	
+
 	@Before
 	public void setUp() {
 		RestAssured.baseURI = "https://reqres.in/";
 	}
-	
+
 	@Test
 	public void patchResult() {// This functions
-		
+
 		JSONObject request = new JSONObject();
 		request.put("name", "morpheus2");
 
-		
 		Response response = RestAssured.given().header("Content-Type", "application/json").contentType(ContentType.JSON)
 				.accept(ContentType.JSON).body(request.toJSONString()).when().patch("api/users/2");// .then().statusCode(200).log().body();
 

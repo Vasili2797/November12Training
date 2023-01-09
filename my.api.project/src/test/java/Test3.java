@@ -1,3 +1,5 @@
+import static org.junit.Assert.assertEquals;
+
 import org.json.simple.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,9 +28,11 @@ public class Test3 { //Success, Finished With 3
 	public void responseCodeOf204() {
 
 		JSONObject request = new JSONObject();
-        given()
+        
+        assertEquals(given()
                 .body(request.toJSONString())
                 .when().delete("https://reqres.in/api/users/2").then()
-                .statusCode(204).log();
+                .extract().statusCode(), 204);
+
 	}
 }

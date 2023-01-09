@@ -1,12 +1,5 @@
 import static org.testng.Assert.assertEquals;
-
-import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.junit.Test;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
@@ -37,28 +30,5 @@ public class Test7 {
 
 		assertEquals(userList.getSupport().getURL(), expectedURL, "url expected");
 		assertEquals(userList.getSupport().getText(), expectedText, "text expected");
-	}
-
-	class Employee {
-		private int id;
-		private String email;
-		private String first_name;
-		private String last_name;
-
-		public int getId() {
-			return id;
-		}
-
-		public String getEmail() {
-			return email;
-		}
-
-		public String getFirstName() {
-			return first_name;
-		}
-
-		public String getLastName() {
-			return last_name;
-		}
 	}
 }
