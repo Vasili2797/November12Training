@@ -1,19 +1,11 @@
 
 public class Data {
 
-	int id;
-	String email;
-	String first_name;
-	String last_name;
-	String data;
-
-	public String getData() {
-		return data;
-	}
-
-	public void setData(String data) {
-		this.data = data;
-	}
+	private int id;
+	private String email;
+	private String first_name;
+	private String last_name;
+	private String avatar;
 
 	public int getId() {
 		return id;
@@ -45,5 +37,13 @@ public class Data {
 
 	public void setLast_name(String last_name) {
 		this.last_name = last_name;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 }

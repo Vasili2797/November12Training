@@ -25,7 +25,7 @@ public class JUnitTestClass {
 	}
 
 	@Test
-	public void getSingleUser_test_1() { // This test passes
+	public void getSingleUser_test_1() {
 
 		Response response = RestAssured.get("https://reqres.in/api/users/2");
 		response.then().statusCode(200).body("data.id", equalTo(2)).body("data.email",
@@ -36,7 +36,7 @@ public class JUnitTestClass {
 	}
 
 	@Test
-	public void verifiesTokenReturnValue_test_2() { // Success, Finished with 2
+	public void verifiesTokenReturnValue_test_2() {
 
 		JSONObject request = new JSONObject();
 		request.put("email", "eve.holt@reqres.in");
@@ -61,7 +61,7 @@ public class JUnitTestClass {
 	}
 
 	@Test
-	public void patchResult_test_4() {// This functions
+	public void patchResult_test_4() {
 
 		JSONObject request = new JSONObject();
 		request.put("name", "morpheus2");
@@ -86,8 +86,7 @@ public class JUnitTestClass {
 	}
 
 	@Test
-	public void putMorpheus2_test_5() {// connection refused problem.... Now this works... Difficulty with time
-								// assertion
+	public void putMorpheus2_test_5() {
 
 		JSONObject request = new JSONObject();
 		request.put("name", "morpheus2");
@@ -102,17 +101,13 @@ public class JUnitTestClass {
 		String responseTime = response.then().extract().path("updatedAt");
 		String nameChanged = response.then().extract().path("name");
 
-//		responseTime.compareTo(nameChanged)
 		System.out.println("ResponseTime " + responseTime);
-//		int number = Integer.parseInt(responseTime);
 
 		LocalDateTime time = java.time.LocalDateTime.now();
 		assertEquals("morpheus2", nameChanged, "The name should be morpheus2"); // make sure the name was changed
 //		Assert.assertTrue();// make sure that the time is current
 
 	}
-
-//	(GET single user). Deserialize the user data into an object.
 
 	@Test
 	public void deserializeDataIntoObject_test_6() throws JsonProcessingException {
@@ -122,6 +117,5 @@ public class JUnitTestClass {
 		ObjectMapper objectMapper = new ObjectMapper();
 		String jsonString = objectMapper.writeValueAsString(response);
 		System.out.println(jsonString);
-
 	}
 }
