@@ -8,5 +8,5 @@ Feature: Feature to view items in Shopping Cart
 	And selects Headwear
 	When Webpage opens and the user selects 'Classic Snap Back Hat'
 	And user Adds the item to cart
-	Then selects 'View or Edit your cart' anchor tag
+	Then selects 'View or Edit your cart' anchor tag 
 	
