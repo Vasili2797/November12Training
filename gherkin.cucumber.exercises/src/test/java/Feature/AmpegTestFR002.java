@@ -44,6 +44,7 @@ public class AmpegTestFR002 {
 		System.out.println("Inside Step - User sees details about particular product in MICRO SERIES");
 		var result = driver.getTitle();
 		assertEquals("Ampeg :: Micro Series", result);
+		driver.quit();
 	}
 	
 }

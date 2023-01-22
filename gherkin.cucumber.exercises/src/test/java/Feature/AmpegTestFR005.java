@@ -1,5 +1,7 @@
 package Feature;
 
+import static org.testng.Assert.assertEquals;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -79,6 +81,14 @@ public class AmpegTestFR005 {
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(),'View or edit your cart')]")));
 		driver.findElement(By.xpath("//a[contains(text(),'View or edit your cart')]")).click();
+		var result=driver.findElement(By.xpath("//h1[@class='page-heading']")).getText();
+		
+		assertEquals(result,"Your Cart (2 items)", "Your cart has to contain 2 items");
+	}
+	
+	@And("customer leaves website afterwards")
+	public void quitDriver() {
+		driver.quit();
 	}
 
 }

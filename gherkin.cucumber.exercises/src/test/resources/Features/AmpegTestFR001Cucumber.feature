@@ -5,3 +5,4 @@ Feature: Feature to test artist endorsements on products
     When user clicks products Tab
     And clicks on particular product
     Then user sees products from different brands and artists who endorse it
+    And we assert that a product is endorsed by a particular artist
