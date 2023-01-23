@@ -1,0 +1,47 @@
+Test plan:
+Objective:
+	Make sure program functions in all supported web browsers
+	Find potential program flaws in User Interface before going online
+	Simplify interaction between web browser and consumer
+
+Test Strategy:
+	See how the program functions in current version 1.0
+	See if there are issues with functionalities at present
+	Write single unit test cases for each new software
+	Integrate all test cases with the whole project
+	Start adapting based on results
+
+Analyze the product:
+	What does the product do
+	What are its current functionalities
+	What is the overall goal of the company with its new features
+	
+Scope:
+In-Scope Functionalities
+
+Nonfunctional requirements:
+	The website must be able to support different web browsers on different Operating Systems
+	The website must be able to provide great customer experience for multiple users simultaneously
+	Website should have minimal number of crashes, and in case of it, must be able to handle properly
+	Program must be versatile and adaptable to changes in algorithm or source code
+	What are the effects of implementation of new features on the website as a whole 
+	
+Functional requirements:
+	Users must be able to easily move around between pages
+	All the call to action fields must work properly
+	User credentials should match respectively
+
+Out-Of-Scope Functionalities:
+	Testing of the hardware and see if there is a need for update to newer technologies
+	See if hardware would be able to handle additional functionalities
+
+Integration:
+	Must install all the required new packages and systems so that new software can be implemented
+	All Test cases and new software must be combined and tested as a group
+	If issues arise when tested collectively, they must be handled as a group
+	If old features are not compatible, change it to be compatible with new features
+
+Testing type:	
+	Test should be conducted using the Agile methodology
+	Design the test and write what the software should be able to handle at a given situation
+	Proceed based on the results of the test and continue development process
