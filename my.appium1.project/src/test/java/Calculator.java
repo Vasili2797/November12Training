@@ -15,7 +15,6 @@ import io.appium.java_client.windows.WindowsDriver;
 
 public class Calculator {
 
-//	static WindowsDriver<WebElement> driver;
 	private static WindowsDriver driver = null;
 	private static WebElement CalculatorResult = null;
 
