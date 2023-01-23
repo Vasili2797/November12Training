@@ -1,0 +1,32 @@
+1. Page: /text-box. Write the xpath that will return the ‘Full Name’textbox using the ID attribute. Hint: This element has the ‘input’tag.
+//*[@id="userName"]
+
+
+2. Page: /buttons. Write the xpath that will return all elements on the page with the 'button' tag:
+the name of the class for all the buttons is btn. 
+
+$x("//button[contains(@class, 'btn')]")
+
+
+3. webtables Write the xpath that will return the div with text of ‘Vega’
+
+$x("//div[contains(@class, 'rt-td') and contains(text(), 'Vega')]")
+
+
+4 Page:/radio-button. Write the xpath that will return the parent element for the radio button with id='impressiveRadio'
+
+$x("//input[@id = 'impressiveRadio']")
+
+
+5. Page: /radio-button. Write the xpath that will return all DIV ancestors for the radio button with id=’impressiveRadio’.
+
+$x("//input[@id = 'impressiveRadio']/../..")
+
+
+6. Page: /radio-button: Write the xpath that will return the sibling for the radio button with id=’impressiveRadio’.
+Do not use the sibling axes. Navigate to the parent element then down to the sibling instead.
+
+$x("//input[@id = 'impressiveRadio']"following-sibling"/")
+
+7. Page: /buttons. Write the xpath that will return all buttons containing the value “Click”.
+$x("//button[@type='button' and contains(., 'Click')]")
