@@ -104,7 +104,6 @@ public class Calculator {
 	}
 
 	protected String _GetCalculatorResultText() {
-		// trim extra text and whitespace off of the display value
 		return CalculatorResult.getText().replace("Display is", "").trim();
 	}
 
