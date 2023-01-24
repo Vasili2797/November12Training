@@ -41,7 +41,7 @@ public class LocationObjectMothers {
 		return new LocationBuilder()
 				.withState(States.Arizona)
 				.withCity(Cities.Flagstaff)
-				.withFlower(Flowers.Saguaro)
+				.withFlower(Flowers.Sagauro)
 				.build();
 	}
 }
