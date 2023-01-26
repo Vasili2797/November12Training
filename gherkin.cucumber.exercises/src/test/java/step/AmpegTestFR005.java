@@ -1,4 +1,4 @@
-package Feature;
+package step;
 
 import static org.testng.Assert.assertEquals;
 
